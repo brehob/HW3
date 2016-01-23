@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "list.h"
 
@@ -10,6 +11,29 @@
 list_t* insert_sorted(list_t* head, list_t* new_element) {
 	assert(head != NULL);
 	assert(new_element != NULL);
+	list_t* p=head;
+
+	//Insert at front
+	if(new_element->index<p->index)
+	{
+		new_element->next=head;
+		head=new_element;
+	}
+	else
+	{
+		while(1)
+		{
+			if (p->next==NULL||(p->next->index >= new_element->index))
+			{
+				new_element->next=p->next;
+				p->next=new_element;
+				break;
+			}
+			else
+				p=p->next;
+		}
+	}
+
 
 	return head;
 }
